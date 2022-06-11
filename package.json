@@ -1,0 +1,26 @@
+{
+  "name": "profile_generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "\"jest\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeandriB/profile_generator.git"
+  },
+  "author": "Leandri Beavis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LeandriB/profile_generator/issues"
+  },
+  "homepage": "https://github.com/LeandriB/profile_generator#readme",
+  "devDependencies": {
+    "inquirer": "^8.2.4",
+    "jest": "^28.1.1"
+  }
+}
