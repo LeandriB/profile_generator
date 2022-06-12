@@ -6,11 +6,10 @@ const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 
-const employees = [];
+const teamMembers = [];
 
 // Array of questions for user input
-const addEmployee = () => {
-    return inquirer.prompt([
+const addEmployee = [
         {
             type: 'input',
             name: 'name',
@@ -64,15 +63,96 @@ const addEmployee = () => {
             default: false
         }
 
-    ])
-}
+    ]
+    // .then(employeeInfo => {
+        
+    //     let {role, name, id, email, github, school, officeNumber, addMore} = employeeInfo;
+    //     let employee;
 
-// TODO: Refactor to allow functionality to add additional team members
+    //     if(role === 'Manager'){
+    //         employee = new Manager(name, id, email, officeNumber);
+    //         console.log(employee);
+    //     } else if(role === 'Engineer') {
+    //         employee = new Engineer(name, id, email, github);
+    //         console.log(employee);
+    //     } else if(role === 'Intern') {
+    //         employee = new Intern(name, id, email, school);
+    //         console.log(employee)
+    //     } else {
+    //         return employee// Refactor switch statement??
+    //     };
 
-addEmployee();
+    //     teamMembers.push(employee)
+    //     // allows user to add additional team members
+    //     if(addMore){
+    //         return addEmployee(teamMembers);
+    //     } else {
+    //         return teamMembers;
+    //     }
+    // });
+
+// addEmployee();
 
 
 // TODO: Write function to writefile
-
+const writeToFile = fileContent => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(`./dist/index.html`, fileContent, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'Team profile was generated'
+            });
+        });
+    });
+};
 
 // TODO: Write function to initialize application
+function init() {
+    return inquirer.prompt(addEmployee)
+    .then(employeeInfo => {
+        
+        let {role, name, id, email, github, school, officeNumber, addMore} = employeeInfo;
+        let employee;
+
+        if(role === 'Manager'){
+            employee = new Manager(name, id, email, officeNumber);
+            console.log(employee);
+        } else if(role === 'Engineer') {
+            employee = new Engineer(name, id, email, github);
+            console.log(employee);
+        } else if(role === 'Intern') {
+            employee = new Intern(name, id, email, school);
+            console.log(employee)
+        } else {
+            return employee// Refactor switch statement??
+        };
+
+        teamMembers.push(employee)
+        // allows user to add additional team members
+        if(addMore){
+            return addEmployee(teamMembers);
+        } else {
+            return teamMembers;
+        }
+    });
+}
+
+// Function call to initialize app
+init()
+    .then(teamMembers => {
+        console.log(teamMembers);
+        return generateHtml(teamMembers);
+    })
+    .then(pageHtml => {
+        return writeToFile(pageHtml);
+    })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+    })
+        .catch(err => {
+        console.log(err);
+    });;
