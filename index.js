@@ -142,8 +142,27 @@ const addEmployee = () => {
 
 
 // TODO: Write function to writefile
+const writeToFile = (data) => {
+    // console.log(data, 'test');
+        fs.writeFile(`./dist/index.html`, generateHtml(data), err => {
+            if (err) {
+                return;
+            }
+        });
+};
 
 // Write function to initialize application
+function init() {
+    addManager()
+    .then(teamMembers => {
+        return teamMembers;
+    })
+    .then(pageHTML => {
+        return writeToFile(pageHTML);
+    }).catch(err => {
+        console.log(err);
+    });
+}
 
 // Function call to initialize app
-
+init();
