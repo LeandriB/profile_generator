@@ -15,22 +15,50 @@ const addManager = () => {
         {
             type: 'input',
             name: 'name',
-            message: 'What is the managers name?'
+            message: 'What is the managers name? (Required)',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the Managers name!");
+                }
+            }
         },
         {
             type: 'input',
             name: 'id',
-            message: 'What is the managers id?', 
+            message: 'What is the managers id? (Required)',
+            validate: idInput => {
+                if (idInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the Managers ID!");
+                }
+            }, 
         },
         {
             type: 'input',
             name: 'email',
-            message: 'What is the managers email?', 
+            message: 'What is the managers email? (Required)',
+            validate: emailInput => {
+                if (emailInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the Managers email!");
+                }
+            } 
         },
         {
             type: 'input',
             name: 'officeNumber',
-            message: 'What is the managers office number?',
+            message: 'What is the managers office number? (Required)',
+            validate: numberInput => {
+                if (numberInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the Managers office number!");
+                }
+            }
         },
     ])
     .then(data => {
@@ -87,54 +115,35 @@ const addEmployee = () => {
             default: false
         }
     ]).then(teamMemberData => {
-            let { role, name, id, email, github, school, addMore} = teamMemberData;
-            let employee;
+        let { role, name, id, email, github, school, addMore} = teamMemberData;
 
-            if (role === 'Engineer') {
-                employee = new Engineer(name, id, email, github);
-                console.log(employee);
-                teamMembers.push(employee);
+        if (role === 'Engineer') {
+            const engineer = new Engineer(name, id, email, github);
+            console.log(engineer);
+            teamMembers.push(engineer);
 
-            } else if (role === 'Intern') {
-                employee = new Intern(name, id, email, school);
-                console.log(employee)
-                teamMembers.push(employee);
+        } else if (role === 'Intern') {
+            const intern = new Intern(name, id, email, school);
+            console.log(intern)
+            teamMembers.push(intern);
         } 
+
+        // teamMembers.push(employee)
+
+        if (addMore) {
+            addEmployee(teamMembers);
+        } else {
+            return teamMembers;
+            // writeToFile(); // ERROR
+        }
+        console.log(teamMembers)
     });
 }
 
 
-// // TODO: Write function to writefile
-// const writeToFile = data => {
-//     return new Promise((resolve, reject) => {
-//         fs.writeFile(`./dist/index.html`, generateHtml(teamMembers), err => {
-//             if (err) {
-//                 reject(err);
-//                 return;
-//             }
-//             resolve({
-//                 ok: true,
-//                 message: 'Team profile was generated'
-//             });
-//         });
-//     });
-// };
+// TODO: Write function to writefile
 
-// TODO: Write function to initialize application
-function init() {
-    addManager()
-}
+// Write function to initialize application
 
-// // Function call to initialize app
-// init()
-//     .then(pageHtml => {
-//         return writeToFile(pageHtml);
-//     })
-//     .then(writeFileResponse => {
-//         console.log(writeFileResponse);
-//     })
-//         .catch(err => {
-//         console.log(err);
-//     });;
+// Function call to initialize app
 
-init()
