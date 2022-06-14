@@ -63,7 +63,7 @@ const addManager = () => {
         },
     ])
     .then(data => {
-        const manager = new Manager(data.name, 'Manager', data.id, data.email, data.officeNumber);
+        const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
         console.log(manager);
         teamMembers.push(manager);
     }) 
