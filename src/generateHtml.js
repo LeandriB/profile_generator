@@ -33,8 +33,6 @@ const generateTeam = function(team) {
 
 // Create card for Manager
 const generateManager = function(manager) {
-    // for(let i = 0; i < manager.length; i++) {
-    //     const data = manager[i];
         return `
             <div class="col-4 mt-4">
                 <div class="card h-100">
@@ -55,8 +53,6 @@ const generateManager = function(manager) {
 
 // Create card for Engineer
 const generateEngineer = function(engineer) {
-    // for(let i = 0; i < engineer.length; i++) {
-    //     const data = engineer[i];
         return `
             <div class="col-4 mt-4">
                 <div class="card h-100">
@@ -96,7 +92,6 @@ const generateIntern = function(intern) {
 
 // Functionality to build page
 const generateHtml = (teamData) => {
-     // Team card array
     teamMembers = []; 
 
     for (let i = 0; i < teamData.length; i++) {
@@ -104,20 +99,20 @@ const generateHtml = (teamData) => {
             const role = employee.getRole(); 
 
 
-        // call manager function
+        // Call manager function
         if (role === 'Manager') {
             const manager = generateManager(employee);
             teamMembers.push(manager);
         }
 
-        // call engineer function
+        // Call engineer function
         if (role === 'Engineer') {
             const engineer = generateEngineer(employee);
 
             teamMembers.push(engineer);
         }
 
-        // call intern function 
+        // Call intern function 
         if (role === 'Intern') {
             const intern = generateIntern(employee);
 
