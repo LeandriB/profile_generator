@@ -43,6 +43,8 @@
   
   ![Preview](./images/preview.png)
 
+  View video [walkthrough](https://youtu.be/lpXV1xiaBYE) here: 
+
   ## Contributing
 
   In order to contribute, create a pull request and follow the steps listed below:
@@ -68,3 +70,10 @@
   ## Questions
 
   If you have any questions, please contact me at my [email](mailto:leandrikuyk@gmail.com?subject=%20README%20Generator). You can find more of my work on my GitHub at [LeandriB](https://github.com/LeandriB). 
+
+  ## Attributions
+
+* [Jest](https://jestjs.io/)
+* [Inquirer](https://www.npmjs.com/package/inquirer)
+* [How to use constructors in JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)
+* [Using Promises in JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
