@@ -10,6 +10,7 @@ const generateHtml = require('./src/generateHtml')
 
 const teamMembers = [];
 
+// Array of questions to create manager of team
 const addManager = () => {
     return inquirer.prompt([
         {
@@ -68,7 +69,7 @@ const addManager = () => {
     }) 
 };
 
-// Array of questions for user input
+// Array of questions to create team members
 const addEmployee = () => {
     return inquirer.prompt([
         {
