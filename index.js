@@ -65,8 +65,7 @@ const addManager = () => {
         const manager = new Manager(data.name, 'Manager', data.id, data.email, data.officeNumber);
         console.log(manager);
         teamMembers.push(manager);
-    })
-    .then(addEmployee)
+    }) 
 };
 
 // Array of questions for user input
@@ -110,12 +109,12 @@ const addEmployee = () => {
         },
         {
             type: 'confirm',
-            name: 'addMore',
+            name: 'addMember',
             message: 'Would you like to an additional team member?',
-            default: false
-        }
+            default: false,
+        },
     ]).then(teamMemberData => {
-        let { role, name, id, email, github, school, addMore} = teamMemberData;
+        let { role, name, id, email, github, school, addMember } = teamMemberData;
 
         if (role === 'Engineer') {
             const engineer = new Engineer(name, id, email, github);
@@ -128,35 +127,34 @@ const addEmployee = () => {
             teamMembers.push(intern);
         } 
 
-        // teamMembers.push(employee)
-
-        if (addMore) {
-            addEmployee(teamMembers);
+        if (addMember) {
+            addEmployee();
         } else {
             return teamMembers;
-            // writeToFile(); // ERROR
         }
-        console.log(teamMembers)
     });
 }
 
-
-// TODO: Write function to writefile
+// Write function to writefile
 const writeToFile = (data) => {
-    // console.log(data, 'test');
+    return new Promise((resolve, reject) => {
         fs.writeFile(`./dist/index.html`, generateHtml(data), err => {
             if (err) {
+                reject(err);
                 return;
             }
+            resolve({
+                ok: true,
+                message: 'HTML was generated'
+            });
         });
+    });
 };
 
 // Write function to initialize application
 function init() {
     addManager()
-    .then(teamMembers => {
-        return teamMembers;
-    })
+    .then(addEmployee)
     .then(pageHTML => {
         return writeToFile(pageHTML);
     }).catch(err => {
